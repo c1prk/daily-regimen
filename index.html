@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RUNG — Streetwear Frame Arc</title>
+<title>RUNG — V Taper Arc</title>
 
 <!-- PWA: installable to home screen on iOS and Android -->
 <link rel="manifest" href="manifest.json">
@@ -158,16 +158,16 @@
 <div class="app">
 
   <div class="hero">
-    <p class="eyebrow">Streetwear Frame Arc · Started Jul 18, 2026</p>
+    <p class="eyebrow">V Taper Arc · Started Oct 26, 2026</p>
     <h1 class="title">RUNG</h1>
-    <p class="tagline">Back and shoulder width, posture, and a long, lean line — no leg days, no bulk-driving traps. Full gym, 30 minutes, five days a week.</p>
+    <p class="tagline">Wide lats, capped side delts, a strong core, and a lean gain to fill out the frame. Four lifting days, upper/lower, plus as much swimming as you can fit.</p>
     <div class="hero-meta">
       <span>WEEK <b id="weekNum">1</b> OF 12</span>
       <span>PHASE <b id="phaseName">Base</b></span>
-      <span>5 SESSIONS / WK · 30 MIN · GYM</span>
+      <span>4 LIFTS + SWIM / WK · ~50 MIN</span>
     </div>
     <div class="deload-banner" id="deloadBanner">
-      <b>Deload week.</b> Volume is cut on purpose this week — this isn't optional and it isn't slacking. This is where the last three weeks of work actually get absorbed.
+      <b>Deload week.</b> Same exercises, same weights, but drop one set from everything and keep swims easy. This is where the last five weeks of work actually get absorbed.
     </div>
   </div>
 
@@ -179,6 +179,27 @@
   <div class="card" id="dayCard"></div>
 
   <div class="card">
+    <h2>Swim</h2>
+    <p class="sub">As often as you can fit it. Counts toward conditioning and recovery, not a replacement for lifting.</p>
+    <div class="consistency-row" style="background:rgba(76,122,150,.08);border-color:rgba(76,122,150,.3);">
+      <div class="consistency-num" id="swimWeekNum" style="color:var(--steel);">0</div>
+      <div class="consistency-text">swims this week (Mon–Sun)<br><span id="swimTodayText">Not logged today.</span></div>
+    </div>
+    <div class="weight-row">
+      <input type="number" id="swimMinInput" placeholder="30" step="5">
+      <span style="color:var(--chalk-dim);font-size:13px;">min</span>
+      <button onclick="logSwim()">Log swim today</button>
+      <button onclick="clearSwim()" style="color:var(--chalk-dim);background:transparent;border-color:var(--line);">clear today</button>
+    </div>
+    <p class="section-label">How to swim it</p>
+    <div class="info-list">
+      <div class="info-row"><span class="num mono">LIFT</span><span><b>Lift days: easy, after lifting.</b> 15–25 min steady, mixing in backstroke to balance all the forward-arm work.</span></div>
+      <div class="info-row"><span class="num mono">OFF</span><span><b>Off days: the real swim.</b> 200 easy warm-up, 8×50 moderate-hard with 20–30s rest, 200 easy. Build to 10–12×50 over the arc.</span></div>
+      <div class="info-row"><span class="num mono">SUN</span><span><b>Sunday: optional.</b> Easy 20 min or take it fully off. Skipping it costs you nothing.</span></div>
+    </div>
+  </div>
+
+  <div class="card">
     <h2>How this adapts</h2>
     <p class="sub">The program moves for you. You don't have to be perfect to keep progressing.</p>
     <div class="consistency-row">
@@ -186,17 +207,18 @@
       <div class="consistency-text">14-day consistency<br>Not a streak. One missed day doesn't zero this out — it's a rolling average, because that's closer to how progress actually works.</div>
     </div>
     <div class="rules">
-      <div class="rule"><span class="num">01</span><span><b>Two clean top-of-range sessions</b> on an exercise → next session, add a small step of weight or reps.</span></div>
+      <div class="rule"><span class="num">01</span><span><b>Hit the top of the rep range on every set</b> → next session, add the smallest weight step and work back up. Stop each set with 1 to 2 reps left in the tank.</span></div>
       <div class="rule"><span class="num">02</span><span><b>Miss your target by 30%+, two sessions running</b> → drop the weight back one step. That's programmed, not a failure.</span></div>
-      <div class="rule"><span class="num">03</span><span><b>Every 4th week is a deload</b>, whether you feel like you need it or not.</span></div>
+      <div class="rule"><span class="num">03</span><span><b>Weeks 6 and 12 are deloads</b>, whether you feel like you need it or not.</span></div>
       <div class="rule"><span class="num">04</span><span><b>One missed day changes nothing.</b> The plan just picks up where it left off — no makeup sessions, no guilt tax.</span></div>
-      <div class="rule"><span class="num">05</span><span><b>Every session has an 8-minute floor.</b> Busy day? Do the compressed version. Keeping the pattern alive matters more than the full volume.</span></div>
+      <div class="rule"><span class="num">05</span><span><b>Every session has a 10-minute floor.</b> Busy day? Do the compressed version. Keeping the pattern alive matters more than the full volume.</span></div>
+      <div class="rule"><span class="num">06</span><span><b>Swim as often as you want, but keep lift-day swims easy</b> and do them after lifting, never before an upper day. Swimming is shoulder-heavy, so if your delts feel fried, the swim gets shorter, not the lift.</span></div>
     </div>
   </div>
 
   <div class="card">
     <h2>Hydration</h2>
-    <p class="sub">Target ~3.6L/day. Sodium-heavy meals (instant noodles) pull water into retention, so this matters even more on those days.</p>
+    <p class="sub">Target ~3.6L/day. You still sweat in the pool even if you can't feel it, so drink extra on swim days.</p>
     <div class="hydro-row">
       <div class="hydro-gauge"><div class="hydro-fill" id="hydroFill" style="height:0%"></div></div>
       <div>
@@ -213,32 +235,39 @@
 
   <div class="card">
     <h2>Fuel</h2>
-    <p class="sub">Small, controlled edge — reshaping distribution, not adding bulk. A real bulk works against the slim/long look; a real cut right now would strip what little you have to build with. This is the narrow lane between the two.</p>
+    <p class="sub">Lean gain. At your frame the bottleneck is muscle, not body fat, so the plan is to eat in a steady surplus and let the abs show up as the core gets stronger. Swimming burns a lot, so eat a little more on heavy swim days.</p>
     <div class="macro-strip">
-      <div class="macro-pill"><div class="v">~ +100</div><div class="l">Cal edge / day</div></div>
-      <div class="macro-pill"><div class="v">155g</div><div class="l">Protein target</div></div>
-      <div class="macro-pill"><div class="v">0.1–0.25</div><div class="l">Lb gained / wk</div></div>
+      <div class="macro-pill"><div class="v">2,700–2,900</div><div class="l">Cal / day</div></div>
+      <div class="macro-pill"><div class="v">140g</div><div class="l">Protein target</div></div>
+      <div class="macro-pill"><div class="v">~0.5</div><div class="l">Lb gained / wk</div></div>
     </div>
-    <p class="section-label">Everyday protein anchors</p>
+    <p class="section-label">Structure</p>
+    <ul class="warmup-list">
+      <li>3 meals plus 1 snack. Two meals a day won't get you there.</li>
+      <li>Protein at every meal, roughly 35 to 45g each.</li>
+      <li>Weigh in weekly. Flat for 2 weeks running → add ~300 cal a day.</li>
+    </ul>
+    <p class="section-label">Protein anchors</p>
     <div class="food-grid">
-      <div class="food-chip"><div class="kr-name kr">계란</div><div class="en-name">Eggs — you're already doing 2/day, cheapest protein there is</div></div>
-      <div class="food-chip"><div class="kr-name kr">닭가슴살 / 닭다리살</div><div class="en-name">Chicken breast or thigh</div></div>
-      <div class="food-chip"><div class="kr-name kr">두부</div><div class="en-name">Tofu — cheap, high-volume protein</div></div>
-      <div class="food-chip"><div class="kr-name kr">순두부찌개 + 계란</div><div class="en-name">Soft tofu stew, egg added</div></div>
-      <div class="food-chip"><div class="kr-name kr">고등어 / 갈치</div><div class="en-name">Mackerel or cutlassfish</div></div>
-      <div class="food-chip"><div class="kr-name kr">현미밥 + 고구마</div><div class="en-name">Brown rice / sweet potato carbs</div></div>
-      <div class="food-chip"><div class="kr-name kr">김치 · 나물</div><div class="en-name">Kimchi, seasoned veg sides — free fiber</div></div>
-      <div class="food-chip"><div class="kr-name kr">비빔밥 + 소고기/계란</div><div class="en-name">Bibimbap, extra beef or egg</div></div>
+      <div class="food-chip"><div class="kr-name kr">계란</div><div class="en-name">Eggs, 3–4 at breakfast with toast or rice</div></div>
+      <div class="food-chip"><div class="kr-name kr">그릭 요거트</div><div class="en-name">Kirkland Greek yogurt + oats + honey</div></div>
+      <div class="food-chip"><div class="kr-name kr">통닭</div><div class="en-name">Costco rotisserie chicken, cheapest cooked protein around</div></div>
+      <div class="food-chip"><div class="kr-name kr">닭다리살 + 밥</div><div class="en-name">Chicken thigh and rice, swap in for pork belly a few nights a week</div></div>
+      <div class="food-chip"><div class="kr-name kr">삼겹살 + 밥</div><div class="en-name">Pork belly and rice is fine, just not every night</div></div>
+      <div class="food-chip"><div class="kr-name kr">우유</div><div class="en-name">Whole milk, a glass with meals adds easy calories</div></div>
+      <div class="food-chip"><div class="kr-name kr">땅콩버터 + 오트밀</div><div class="en-name">Peanut butter and oats, the easy snack</div></div>
+      <div class="food-chip"><div class="kr-name kr">김치 · 나물</div><div class="en-name">Kimchi, seasoned veg sides, free fiber</div></div>
     </div>
+    <p class="ex-note" style="margin-top:12px;">Taquitos are fine as a snack on top of real meals, not as a meal.</p>
   </div>
 
   <div class="card">
     <h2>Calorie + protein log</h2>
-    <p class="sub">You said you're starting to count — log the daily total here and watch the 7-day average instead of judging any single day.</p>
+    <p class="sub">Log the daily total here and watch the 7-day average instead of judging any single day.</p>
     <div class="weight-row">
-      <input type="number" id="calInput" placeholder="2300" step="10">
+      <input type="number" id="calInput" placeholder="2800" step="10">
       <span style="color:var(--chalk-dim);font-size:13px;">cal</span>
-      <input type="number" id="proteinInput" placeholder="155" step="1">
+      <input type="number" id="proteinInput" placeholder="140" step="1">
       <span style="color:var(--chalk-dim);font-size:13px;">g protein</span>
       <button onclick="logNutrition()">Log today</button>
     </div>
@@ -249,7 +278,7 @@
     <h2>Weight trend</h2>
     <p class="sub">Logged weight, shown as a trend — not a daily verdict. Day-to-day swings are water, not fat or muscle.</p>
     <div class="weight-row">
-      <input type="number" id="weightInput" placeholder="150" step="0.1">
+      <input type="number" id="weightInput" placeholder="140" step="0.1">
       <span style="color:var(--chalk-dim);font-size:13px;">lb</span>
       <button onclick="logWeight()">Log today</button>
     </div>
@@ -261,7 +290,7 @@
     <h2>Face &amp; posture — what actually moves the needle</h2>
     <p class="sub">Checked against current evidence, not internet trend claims.</p>
     <div class="info-list">
-      <div class="info-row"><span class="num mono">01</span><span><b>Body fat is the main driver</b> of jaw and cheekbone definition. Facial fat is one of the last places to clear — this follows the same slow timeline as the rest of the recomp.</span></div>
+      <div class="info-row"><span class="num mono">01</span><span><b>Body fat is the main driver</b> of jaw and cheekbone definition. Facial fat is one of the last places to clear — it follows the same slow timeline as the rest of your physique.</span></div>
       <div class="info-row"><span class="num mono">02</span><span><b>Sodium and water retention</b> cause visible puffiness fast (days, not months) — instant noodles are the main culprit here. Hitting your water target offsets this.</span></div>
       <div class="info-row"><span class="num mono">03</span><span><b>Posture is the highest-leverage lever you actually have.</b> Forward head posture pushes the chin down and compresses the jaw-neck line — the posture work already built into every session below does double duty here.</span></div>
       <div class="info-row"><span class="num mono">04</span><span><b>Genetics set the ceiling</b> on jaw width, chin projection, and cheekbone height. No training or diet changes that.</span></div>
@@ -288,13 +317,13 @@
     <div class="chalk-nav" id="chalkNav"></div>
   </div>
 
-  <footer>RUNG — built for a 12-week arc starting July 18, 2026. Adjust freely; the rules matter more than the exact numbers.</footer>
+  <footer>RUNG · 12-week V taper arc starting October 26, 2026. Adjust freely; the rules matter more than the exact numbers.</footer>
 
 </div>
 
 <script>
 /* ============ CONFIG ============ */
-const START_DATE = new Date('2026-07-18T00:00:00');
+const START_DATE = new Date('2026-10-26T00:00:00'); // a Monday
 const WEEKS_TOTAL = 12;
 const HYDRO_TARGET = 3600; // ml
 
@@ -303,91 +332,84 @@ function todayDate(){ const d=new Date(); d.setHours(0,0,0,0); return d; }
 function daysBetween(a,b){ return Math.round((b-a)/86400000); }
 
 /* ============ PROGRAM DATA ============ */
-// Full gym, no home/away split anymore. No leg days by request. Every day carries
-// posture-specific work since the "wider shoulders, longer neck" look depends on it
-// as much as the lifts do.
-const CYCLE = ['back1','shoulders','push','back2','finisher','rest','rest'];
+// Upper/lower, 4 lifting days, pinned to the calendar week (Mon = upper A).
+// Upper days carry extra lat and side-delt volume since those build the V taper.
+// Wed/Sat are dedicated swim days, Sunday is full rest (optional easy swim).
+const WEEKDAY_PLAN = {1:'upperA', 2:'lowerA', 3:'swim', 4:'upperB', 5:'lowerB', 6:'swim', 0:'rest'};
 
 const DAYS = {
-  back1: {
-    title: 'Back Width', focusTag:'Gym · Pull-up progression',
-    warmup: ['Band pull-aparts, 2×15','Scap pulls on the bar, 2×8','Shoulder circles, 15 each direction'],
+  upperA: {
+    title: 'Upper A · Width', focusTag:'Gym · Lats, side delts, pull-up progression',
+    warmup: ['Band pull-aparts, 2×15','Scap pulls on the bar, 2×8','Light lateral raise, 1×15'],
     main: [
-      {id:'b1-1', name:'Negative pull-ups', sets:'4', reps:'3–5', rest:'90s', note:'Full 5-second controlled lower. Still your main pull-up driver — do this first while fresh.'},
-      {id:'b1-2', name:'Lat pulldown (wide grip)', sets:'3', reps:'10–12', rest:'75s', note:'Focus on pulling with the lats, not shrugging up through the traps — that shrug is exactly what shortens the neck line.'},
-      {id:'b1-3', name:'Assisted pull-ups (machine)', sets:'3', reps:'5–8', rest:'90s', note:'Set assistance so the last 2 reps are genuinely hard.'},
-      {id:'b1-4', name:'Single-arm cable row', sets:'3', reps:'10/side', rest:'60s', note:'Controlled tempo, avoid yanking through the traps.'},
-      {id:'b1-5', name:'Straight-arm pulldown', sets:'3', reps:'12', rest:'60s', note:'Lat isolation with almost no trap involvement — good width driver for this specific goal.'}
+      {id:'ua-1', name:'Pull-up negatives', sets:'3', reps:'3', rest:'90s', note:'Jump to the top, lower over a full 5 seconds. First, while fresh.'},
+      {id:'ua-2', name:'Lat pulldown', sets:'3', reps:'8–12', rest:'90s', note:'Pull elbows down to your back pockets. Lats, not a shrug.'},
+      {id:'ua-3', name:'Incline dumbbell press', sets:'3', reps:'8–12', rest:'90s', note:''},
+      {id:'ua-4', name:'Chest-supported row', sets:'3', reps:'10–12', rest:'75s', note:''},
+      {id:'ua-5', name:'Dumbbell lateral raise', sets:'4', reps:'12–20', rest:'60s', note:'The main shoulder width driver. Light enough to control, lead with the elbows.'},
+      {id:'ua-6', name:'Face pulls', sets:'3', reps:'15', rest:'60s', note:'Still non-negotiable for posture.'}
     ],
-    skill: {name:'Pull-up test (every 2 weeks only)', detail:'One single max-effort attempt at a real pull-up, no more than once every 2 weeks. Testing more often eats into the negatives volume that\'s actually building the rep.'},
-    posture: 'Wall angels, 2×10. Doorway chest stretch, 2×30s.',
-    mvp: '4×3 negatives, 3×8 lat pulldown, 2×30s doorway stretch. ~8 min total.'
+    skill: {name:'Pull-up test (every 2 weeks only)', detail:'One max set of strict pull-ups, no more than once every 2 weeks. Log it so you can see it climb.'},
+    posture: 'Doorway chest stretch, 2×30s. Wall angels, 2×10.',
+    mvp: '3×3 negatives, 3×10 lat pulldown, 3×15 lateral raise. ~10 min total.'
   },
-  shoulders: {
-    title: 'Shoulder Width + Posture', focusTag:'Gym · Lateral & rear delts',
-    warmup: ['Arm circles, 15 each direction','Band pull-aparts, 2×15'],
+  lowerA: {
+    title: 'Lower A · Strength + Core', focusTag:'Gym · Squat, hinge, abs',
+    warmup: ['Bodyweight squats, 2×10','Leg swings, 10 each leg','Glute bridge, 1×15'],
     main: [
-      {id:'sh-1', name:'Cable or dumbbell lateral raise', sets:'4', reps:'12–15', rest:'60s', note:'Main width driver for the shoulders without loading the traps the way overhead pressing does.'},
-      {id:'sh-2', name:'Face pulls', sets:'4', reps:'15', rest:'60s', note:'The single most important exercise in this program for the posture and neck-length goal — don\'t skip or rush this one.'},
-      {id:'sh-3', name:'Reverse pec deck / rear delt fly', sets:'3', reps:'12–15', rest:'60s', note:''},
-      {id:'sh-4', name:'Cable external rotation', sets:'3', reps:'12/side', rest:'45s', note:'Rotator cuff health + posture, light weight, control over speed.'},
-      {id:'sh-5', name:'Seated cable row, wide grip, elbows high', sets:'3', reps:'12', rest:'60s', note:'Upper back width — keep elbows high and wide, not driving straight back into the traps.'}
+      {id:'la-1', name:'Goblet squat or back squat', sets:'3', reps:'6–10', rest:'2 min', note:'Start with goblet squats if barbell squats are new. Depth over load.'},
+      {id:'la-2', name:'Romanian deadlift', sets:'3', reps:'8–10', rest:'2 min', note:'Hinge until you feel the hamstrings stretch, flat back the whole way.'},
+      {id:'la-3', name:'Walking lunges', sets:'2', reps:'10/leg', rest:'90s', note:''},
+      {id:'la-4', name:'Hanging knee raise', sets:'3', reps:'10–15', rest:'60s', note:'Curl the pelvis up, don\'t just swing the legs. Progress to straight-leg raises.'},
+      {id:'la-5', name:'Calf raise', sets:'3', reps:'12–15', rest:'60s', note:''}
     ],
     skill: null,
-    posture: 'Chin tucks, 2×10. Thoracic extension over a bench, 2×30s.',
-    mvp: '3×15 lateral raise, 3×15 face pulls, 2×10 chin tucks. ~8 min total.'
+    posture: 'Hip flexor stretch, 2×30s/side. Chin tucks, 2×10.',
+    mvp: '3×8 goblet squat, 3×10 hanging knee raise. ~10 min total.'
   },
-  push: {
-    title: 'Push, Controlled Volume', focusTag:'Gym · Chest & triceps',
-    warmup: ['Scap push-ups, 10','Band pull-aparts, 2×15 (balances the push volume)'],
+  upperB: {
+    title: 'Upper B · Shoulders + Back', focusTag:'Gym · Overhead, rows, delts',
+    warmup: ['Band pull-aparts, 2×15','Arm circles, 15 each direction','Scap push-ups, 10'],
     main: [
-      {id:'p-1', name:'Incline dumbbell or machine chest press', sets:'3', reps:'10–12', rest:'75s', note:'Moderate weight — this program isn\'t chasing max chest size, just enough shape to balance the back/shoulder width.'},
-      {id:'p-2', name:'Cable chest fly', sets:'3', reps:'12–15', rest:'60s', note:''},
-      {id:'p-3', name:'Triceps pushdown', sets:'3', reps:'12–15', rest:'60s', note:''},
-      {id:'p-4', name:'Push-ups', sets:'2', reps:'AMRAP to ~15', rest:'60s', note:''},
-      {id:'p-5', name:'Overhead triceps extension', sets:'2', reps:'12', rest:'60s', note:''}
+      {id:'ub-1', name:'Assisted pull-up (machine or band)', sets:'3', reps:'6–10', rest:'90s', note:'Use the least assistance that still gets you 6 clean reps. Cut assistance as reps climb.'},
+      {id:'ub-2', name:'Seated dumbbell shoulder press', sets:'3', reps:'8–12', rest:'90s', note:''},
+      {id:'ub-3', name:'Seated cable row', sets:'3', reps:'10–12', rest:'75s', note:'Squeeze the shoulder blades back, don\'t lean and yank.'},
+      {id:'ub-4', name:'Flat dumbbell press', sets:'3', reps:'8–12', rest:'90s', note:''},
+      {id:'ub-5', name:'Cable lateral raise', sets:'3', reps:'15', rest:'60s', note:'Second shot of side delt volume for the week.'},
+      {id:'ub-6', name:'Rear delt fly', sets:'3', reps:'15', rest:'60s', note:'Balances all the pressing, and swimming, for shoulder health.'}
     ],
     skill: null,
-    posture: 'Doorway pec stretch, 2×30s. Wall angels, 2×10 — do these immediately after, push volume tightens the chest fast.',
-    mvp: '3×10 chest press, 2×AMRAP push-ups, 2×30s doorway stretch. ~8 min total.'
+    posture: 'Thoracic extension over a bench, 2×30s. Chin tucks, 2×10.',
+    mvp: '3×8 assisted pull-ups, 3×10 shoulder press, 3×15 cable lateral raise. ~10 min total.'
   },
-  back2: {
-    title: 'Back + Posture Reset', focusTag:'Gym · Corrective focus',
-    warmup: ['Cat-cow, 8','Thoracic rotations, 8/side'],
+  lowerB: {
+    title: 'Lower B · Volume + Abs', focusTag:'Gym · Legs, core finisher',
+    warmup: ['Bike or incline walk, 3 min','Bodyweight squats, 1×10'],
     main: [
-      {id:'b2-1', name:'Chest-supported row (machine or bench)', sets:'3', reps:'10–12', rest:'75s', note:''},
-      {id:'b2-2', name:'Face pulls', sets:'3', reps:'15', rest:'60s', note:'Repeated on purpose — this is the exercise doing the most work for the look you actually want.'},
-      {id:'b2-3', name:'Band pull-apart', sets:'3', reps:'20', rest:'45s', note:''},
-      {id:'b2-4', name:'Prone Y-T-W raises (light)', sets:'3', reps:'8 each letter', rest:'60s', note:'Rear delt + lower trap activation — corrective, not a mass builder.'},
-      {id:'b2-5', name:'Thoracic extension over foam roller/bench', sets:'3', reps:'30s hold', rest:'30s', note:''}
-    ],
-    skill: {name:'Negative pull-up maintenance', detail:'3×3 negatives to keep pull-up progress alive without turning this into a second full pull day.'},
-    posture: 'Chin tucks, 2×10.',
-    mvp: '3×12 rows, 3×15 face pulls, 3×20 band pull-apart. ~8 min total.'
-  },
-  finisher: {
-    title: 'Delts + Core + Mobility', focusTag:'Gym · Light day, slim torso focus',
-    warmup: ['Light arm circles, 10 each direction'],
-    main: [
-      {id:'f-1', name:'Lateral raise', sets:'3', reps:'15', rest:'60s', note:''},
-      {id:'f-2', name:'Cable face pull or band pull-apart', sets:'3', reps:'15', rest:'45s', note:''},
-      {id:'f-3', name:'Hollow body hold', sets:'3', reps:'20–30s', rest:'45s', note:'Core work for the slim-torso line — not meant to bulk the midsection.'},
-      {id:'f-4', name:'Plank', sets:'2', reps:'40–60s', rest:'45s', note:''},
-      {id:'f-5', name:'Side plank', sets:'2', reps:'30s/side', rest:'45s', note:''}
+      {id:'lb-1', name:'Leg press', sets:'3', reps:'8–12', rest:'2 min', note:''},
+      {id:'lb-2', name:'Hamstring curl', sets:'3', reps:'10–12', rest:'75s', note:''},
+      {id:'lb-3', name:'Cable crunch', sets:'3', reps:'10–15', rest:'60s', note:'Load the abs like any other muscle. Add weight when you hit 15.'},
+      {id:'lb-4', name:'Plank', sets:'3', reps:'30–45s', rest:'45s', note:''},
+      {id:'lb-5', name:'Side plank', sets:'2', reps:'30s/side', rest:'45s', note:''}
     ],
     skill: null,
-    posture: 'Thoracic extension, doorway stretch, and neck side-stretch — this day leans heavier into mobility since the lifting volume is lighter. The neck stretch is about releasing tension, not lengthening bone.',
-    mvp: '3×15 lateral raise, 2×40s plank, thoracic extension 2×30s. ~8 min total.'
+    posture: 'Hip flexor stretch, 2×30s/side. Wall angels, 2×10.',
+    mvp: '3×10 leg press, 3×12 cable crunch, 2×40s plank. ~10 min total.'
+  },
+  swim: {
+    title: 'Swim Day', focusTag:'Pool · Conditioning',
+    isSwim: true, isRest: true,
+    warmup: [], main: [], skill: null, posture: null, mvp: null
   },
   rest: {
-    title: 'Rest', focusTag:'Recovery — swim continues',
+    title: 'Rest', focusTag:'Recovery · optional easy swim',
     warmup: [], main: [], skill: null, posture: null,
     mvp: null,
     isRest: true
   }
 };
 
-const DAY_LABELS = {back1:'Back', shoulders:'Delts', push:'Push', back2:'Back', finisher:'Finish', rest:'Rest'};
+const DAY_LABELS = {upperA:'Upper', lowerA:'Lower', upperB:'Upper', lowerB:'Lower', swim:'Swim', rest:'Rest'};
 
 /* ============ STORAGE ============ */
 // Real browser localStorage — persists on any host, no external runtime required.
@@ -440,13 +462,17 @@ window.importData = function(event){
 let selectedDate = todayDate();
 
 function cycleKeyFor(date){
-  const idx = ((daysBetween(START_DATE, date) % 7) + 7) % 7;
-  return CYCLE[idx];
+  return WEEKDAY_PLAN[date.getDay()];
+}
+function mondayOf(date){
+  const d = new Date(date); d.setHours(0,0,0,0);
+  d.setDate(d.getDate() - ((d.getDay()+6)%7));
+  return d;
 }
 function weekNumberFor(date){
   return Math.max(1, Math.floor(daysBetween(START_DATE, date)/7) + 1);
 }
-function isDeloadWeek(wk){ return wk % 4 === 0; }
+function isDeloadWeek(wk){ return wk % 6 === 0; }
 function expectedExerciseIds(key){
   const day = DAYS[key];
   if(!day || day.isRest) return [];
@@ -469,8 +495,7 @@ function renderRig(){
   const rig = document.getElementById('rig');
   rig.innerHTML = '';
   const today = todayDate();
-  const windowStart = new Date(today);
-  windowStart.setDate(windowStart.getDate() - (((daysBetween(START_DATE, today) % 7)+7)%7));
+  const windowStart = mondayOf(today);
   const promises = [];
   for(let i=0;i<7;i++){
     const d = new Date(windowStart);
@@ -487,6 +512,7 @@ function renderRig(){
       '<div class="ring-date">'+(d.getMonth()+1)+'/'+d.getDate()+'</div>';
     btn.onclick = () => { selectedDate = d; renderRig(); renderDayCard(); };
     rig.appendChild(btn);
+    if(key==='swim') promises.push(sGet('swim:'+dateKey).then(m => { if(m) btn.classList.add('done'); }));
     promises.push(sGet('checklist:'+dateKey).then(list => {
       const dayDef = DAYS[key];
       const expected = expectedExerciseIds(key);
@@ -506,9 +532,16 @@ async function renderDayCard(){
   const card = document.getElementById('dayCard');
   const dLabel = selectedDate.toLocaleDateString(undefined,{weekday:'long', month:'short', day:'numeric'});
 
+  if(day.isSwim){
+    card.innerHTML = '<h2>'+day.title+'</h2><p class="sub">'+dLabel+' · '+day.focusTag+'</p>'+
+      '<p class="section-label">Main set</p>'+
+      '<ul class="warmup-list"><li>200 easy, any stroke</li><li>8×50 moderate-hard, 20–30s rest (build to 10–12)</li><li>4×25 kick with a board</li><li>200 easy, at least half backstroke</li></ul>'+
+      '<p style="font-size:13.5px;color:var(--chalk-dim);margin:10px 0 0;">No lifting. Log it in the Swim card below when you\'re done.</p>';
+    return;
+  }
   if(day.isRest){
     card.innerHTML = '<h2>'+day.title+'</h2><p class="sub">'+dLabel+' · '+day.focusTag+'</p>'+
-      '<p style="font-size:14px;color:var(--chalk-dim);">No lifting today. Keep the daily swim, maybe a few minutes of the posture stretches if you feel like it — nothing required. Rest is programmed, not earned separately.</p>';
+      '<p style="font-size:14px;color:var(--chalk-dim);">No lifting. An easy 20-minute swim is fine if you want it, or take the whole day off. Rest is part of the program, not a break from it.</p>';
     return;
   }
 
@@ -530,13 +563,14 @@ async function renderDayCard(){
   }).join('');
 
   card.innerHTML = '<h2>'+day.title+'</h2><p class="sub">'+dLabel+' · '+day.focusTag+'</p>'+
-    '<p class="section-label">Warm-up (3 min)</p>'+
+    '<p class="section-label">Warm-up (3–5 min)</p>'+
     '<ul class="warmup-list">'+day.warmup.map(w=>'<li>'+w+'</li>').join('')+'</ul>'+
     '<p class="section-label">Main work</p>'+
     '<table class="ex-table"><thead><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Rest</th><th>Done</th></tr></thead><tbody>'+rows+'</tbody></table>'+
     (day.skill ? '<p class="section-label">Also today</p><div style="font-size:13.5px;"><span class="ex-name">'+day.skill.name+'</span><div class="ex-note">'+day.skill.detail+'</div></div>' : '')+
     (day.posture ? '<p class="section-label posture">Posture finisher (3–4 min)</p><p style="font-size:13.5px;color:var(--chalk-dim);margin:0;">'+day.posture+'</p>' : '')+
-    '<div class="mvp-toggle"><button onclick="toggleMvp()">Too busy today? Show the 8-minute version</button></div>'+
+    '<p class="section-label" style="color:var(--steel);">After lifting</p><p style="font-size:13.5px;color:var(--chalk-dim);margin:0;">Optional easy swim, 15–25 min. Log it below.</p>'+
+    '<div class="mvp-toggle"><button onclick="toggleMvp()">Too busy today? Show the 10-minute version</button></div>'+
     '<div class="mvp-box" id="mvpBox">'+day.mvp+'</div>';
 }
 
@@ -672,20 +706,46 @@ async function renderNutritionTrend(){
   msg += avgCal ? avgCal+' cal' : 'no cal data';
   msg += ' / ';
   msg += avgProtein ? avgProtein+'g protein' : 'no protein data';
-  if(avgCal) msg += avgCal < 2500 ? ' — running below the small-surplus target, likely near maintenance or a mild deficit.' : (avgCal > 3000 ? ' — running above the small-surplus target.' : ' — in range for the small controlled edge.');
+  if(avgCal) msg += avgCal < 2600 ? '. Below target, probably not enough to grow. Add a meal or snack.' : (avgCal > 3100 ? '. Above target, fine on heavy swim weeks, otherwise ease back.' : '. In range for a lean gain.');
+  if(avgProtein && avgProtein < 120) msg += ' Protein is low, aim for 140g.';
   text.textContent = msg;
 }
 
+/* ============ SWIM LOG ============ */
+async function renderSwim(){
+  const today = todayDate();
+  const mon = mondayOf(today);
+  let count = 0;
+  for(let i=0;i<7;i++){
+    const d = new Date(mon); d.setDate(d.getDate()+i);
+    if(await sGet('swim:'+toDateKey(d))) count++;
+  }
+  document.getElementById('swimWeekNum').textContent = count;
+  const t = await sGet('swim:'+toDateKey(today));
+  document.getElementById('swimTodayText').textContent = t ? ('Today: '+t+' min logged.') : 'Not logged today.';
+}
+window.logSwim = async function(){
+  const input = document.getElementById('swimMinInput');
+  const val = parseFloat(input.value) || 30;
+  await sSet('swim:'+toDateKey(todayDate()), val);
+  input.value='';
+  renderSwim(); renderRig();
+};
+window.clearSwim = async function(){
+  localStorage.removeItem(STORAGE_PREFIX+'swim:'+toDateKey(todayDate()));
+  renderSwim(); renderRig();
+};
+
 /* ============ MINDSET CHALKBOARD ============ */
 const TIPS = [
-  "A jawline follows body fat down, not the other way around — the posture work you're already doing does more for how your neck and face read in photos than any face exercise would.",
-  "Strength gains aren't a straight line. Early weeks are mostly your nervous system learning the movement, before you see real size or reps show up.",
-  "A rough session doesn't erase the last one. One bad day of pull-up negatives means nothing across a 12-week arc.",
-  "The first pull-up usually arrives suddenly, not gradually — a lot of people go from zero to one seemingly overnight after weeks of negatives that felt like they weren't working.",
-  "If the scale or the mirror feels discouraging today, check the trend line instead of the single data point. Day-to-day is mostly water and food volume, not fat or muscle.",
-  "Skipping a day is not the same as quitting. The plan doesn't reset — it just picks back up tomorrow.",
-  "Doing the 8-minute version on a slammed day is a win, not a consolation prize. It's what keeps the pattern alive between the sessions that count.",
-  "Posture changes read as physique changes faster than muscle does — pulling your head back into alignment can visibly change your silhouette within weeks, long before any lift moves the needle."
+  "The first few weeks are mostly your nervous system learning the lifts. Strength jumps fast before size shows up, so trust the log over the mirror early on.",
+  "A rough session doesn't erase the last one. One bad day means nothing across a 12-week arc.",
+  "The first strict pull-up usually arrives suddenly. Weeks of negatives feel like nothing, then one day you're over the bar.",
+  "Abs are built like any other muscle, then revealed. You're lean enough already that a stronger core will start showing on its own.",
+  "If the scale or mirror feels discouraging, check the trend line instead of the single data point. Day to day is mostly water and food volume.",
+  "Skipping a day is not the same as quitting. The plan doesn't reset, it just picks back up tomorrow.",
+  "The 10-minute version on a slammed day is a win, not a consolation prize. It keeps the habit alive.",
+  "Confidence follows evidence. Every logged session is proof you kept a promise to yourself, and that stacks up faster than the muscle does."
 ];
 let tipIndex = 0;
 function renderChalk(){
@@ -709,6 +769,7 @@ if('serviceWorker' in navigator){
   await renderHydration();
   await renderWeightChart();
   await renderNutritionTrend();
+  await renderSwim();
   renderChalk();
 })();
 </script>

@@ -1,7 +1,7 @@
 {
-  "name": "RUNG — Streetwear Frame Arc",
+  "name": "RUNG — V Taper Arc",
   "short_name": "RUNG",
-  "description": "Daily calisthenics and gym training log — back/shoulder width, posture, and pull-up progression.",
+  "description": "Upper/lower gym program and swim log: V taper, abs, and pull-up progression.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
