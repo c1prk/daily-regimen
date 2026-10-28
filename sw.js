@@ -1,6 +1,6 @@
 // Minimal offline cache for RUNG — caches the app shell so it opens without a network hit.
 // Bump CACHE_NAME whenever rung.html changes meaningfully so old data gets replaced.
-const CACHE_NAME = 'rung-cache-v2';
+const CACHE_NAME = 'rung-cache-v3';
 const APP_SHELL = ['./index.html', './manifest.json', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', (event) => {
