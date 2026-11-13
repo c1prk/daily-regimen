@@ -340,18 +340,18 @@ const WEEKDAY_PLAN = {1:'upperA', 2:'lowerA', 3:'swim', 4:'upperB', 5:'lowerB', 
 const DAYS = {
   upperA: {
     title: 'Upper A · Width', focusTag:'Gym · Lats, side delts, pull-up progression',
-    warmup: ['Band pull-aparts, 2×15','Scap pulls on the bar, 2×8','Light lateral raise, 1×15'],
+    warmup: ['Band pull-aparts, 2×15','Scap pulls on the bar, 2×8','One light set on the lateral raise machine'],
     main: [
-      {id:'ua-1', name:'Pull-up negatives', sets:'3', reps:'3', rest:'90s', note:'Jump to the top, lower over a full 5 seconds. First, while fresh.'},
+      {id:'ua-1', name:'Pull-up negatives', sets:'3', reps:'3', rest:'90s', note:'Jump to the top, lower over a full 5 seconds. First, while fresh. Kept as the one bodyweight move because it\'s the fastest route to a real pull-up.'},
       {id:'ua-2', name:'Lat pulldown', sets:'3', reps:'8–12', rest:'90s', note:'Pull elbows down to your back pockets. Lats, not a shrug.'},
-      {id:'ua-3', name:'Incline dumbbell press', sets:'3', reps:'8–12', rest:'90s', note:''},
-      {id:'ua-4', name:'Chest-supported row', sets:'3', reps:'10–12', rest:'75s', note:''},
-      {id:'ua-5', name:'Dumbbell lateral raise', sets:'4', reps:'12–20', rest:'60s', note:'The main shoulder width driver. Light enough to control, lead with the elbows.'},
-      {id:'ua-6', name:'Face pulls', sets:'3', reps:'15', rest:'60s', note:'Still non-negotiable for posture.'}
+      {id:'ua-3', name:'Incline machine chest press', sets:'3', reps:'8–12', rest:'90s', note:'Seat set so the handles line up with mid-chest.'},
+      {id:'ua-4', name:'Chest-supported row machine', sets:'3', reps:'10–12', rest:'75s', note:'Chest stays on the pad, squeeze the shoulder blades together.'},
+      {id:'ua-5', name:'Lateral raise machine', sets:'4', reps:'12–20', rest:'60s', note:'The main shoulder width driver. Use a cable lateral raise if there\'s no machine.'},
+      {id:'ua-6', name:'Face pulls (cable)', sets:'3', reps:'15', rest:'60s', note:'Still non-negotiable for posture.'}
     ],
     skill: {name:'Pull-up test (every 2 weeks only)', detail:'One max set of strict pull-ups, no more than once every 2 weeks. Log it so you can see it climb.'},
     posture: 'Doorway chest stretch, 2×30s. Wall angels, 2×10.',
-    mvp: '3×3 negatives, 3×10 lat pulldown, 3×15 lateral raise. ~10 min total.'
+    mvp: '3×3 negatives, 3×10 lat pulldown, 3×15 lateral raise machine. ~10 min total.'
   },
   lowerA: {
     title: 'Lower A · Core + Legs', focusTag:'Gym · Abs first priority, legs maintained',
@@ -370,18 +370,18 @@ const DAYS = {
   },
   upperB: {
     title: 'Upper B · Shoulders + Back', focusTag:'Gym · Overhead, rows, delts',
-    warmup: ['Band pull-aparts, 2×15','Arm circles, 15 each direction','Scap push-ups, 10'],
+    warmup: ['Band pull-aparts, 2×15','Arm circles, 15 each direction','One light set on the shoulder press machine'],
     main: [
-      {id:'ub-1', name:'Assisted pull-up (machine or band)', sets:'3', reps:'6–10', rest:'90s', note:'Use the least assistance that still gets you 6 clean reps. Cut assistance as reps climb.'},
-      {id:'ub-2', name:'Seated dumbbell shoulder press', sets:'3', reps:'8–12', rest:'90s', note:''},
+      {id:'ub-1', name:'Assisted pull-up machine', sets:'3', reps:'6–10', rest:'90s', note:'Use the least assistance that still gets you 6 clean reps. Cut assistance as reps climb.'},
+      {id:'ub-2', name:'Machine shoulder press', sets:'3', reps:'8–12', rest:'90s', note:''},
       {id:'ub-3', name:'Seated cable row', sets:'3', reps:'10–12', rest:'75s', note:'Squeeze the shoulder blades back, don\'t lean and yank.'},
-      {id:'ub-4', name:'Flat dumbbell press', sets:'3', reps:'8–12', rest:'90s', note:''},
+      {id:'ub-4', name:'Machine chest press (flat)', sets:'3', reps:'8–12', rest:'90s', note:''},
       {id:'ub-5', name:'Cable lateral raise', sets:'3', reps:'15', rest:'60s', note:'Second shot of side delt volume for the week.'},
-      {id:'ub-6', name:'Rear delt fly', sets:'3', reps:'15', rest:'60s', note:'Balances all the pressing, and swimming, for shoulder health.'}
+      {id:'ub-6', name:'Reverse pec deck', sets:'3', reps:'15', rest:'60s', note:'Rear delts. Balances all the pressing, and swimming, for shoulder health.'}
     ],
     skill: null,
     posture: 'Thoracic extension over a bench, 2×30s. Chin tucks, 2×10.',
-    mvp: '3×8 assisted pull-ups, 3×10 shoulder press, 3×15 cable lateral raise. ~10 min total.'
+    mvp: '3×8 assisted pull-up machine, 3×10 machine shoulder press, 3×15 cable lateral raise. ~10 min total.'
   },
   lowerB: {
     title: 'Lower B · Core + Legs', focusTag:'Gym · Abs and obliques, legs maintained',
