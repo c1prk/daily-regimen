@@ -163,11 +163,11 @@
   <div class="hero">
     <p class="eyebrow">V Taper Arc · Started Oct 26, 2026</p>
     <h1 class="title">RUNG</h1>
-    <p class="tagline">Wide lats, capped side delts, a strong core, and a lean gain to fill out the frame. Four lifting days, upper/lower, plus as much swimming as you can fit.</p>
+    <p class="tagline">Wide lats, capped side delts, a strong core, and a lean gain to fill out the frame. Five lifting days: three upper, two core and legs, plus a swim day.</p>
     <div class="hero-meta">
       <span>WEEK <b id="weekNum">1</b> OF 12</span>
       <span>PHASE <b id="phaseName">Base</b></span>
-      <span>4 LIFTS + SWIM / WK · ~50 MIN</span>
+      <span>5 LIFTS + 1 SWIM / WK · ~45 MIN</span>
     </div>
     <div class="deload-banner" id="deloadBanner">
       <b>Deload week.</b> Same exercises, same weights, but drop one set from everything and keep swims easy. This is where the last five weeks of work actually get absorbed.
@@ -197,8 +197,8 @@
     <p class="section-label">How to swim it</p>
     <div class="info-list">
       <div class="info-row"><span class="num mono">LIFT</span><span><b>Lift days: easy, after lifting.</b> 15–25 min steady, mixing in backstroke to balance all the forward-arm work.</span></div>
-      <div class="info-row"><span class="num mono">OFF</span><span><b>Off days: the real swim.</b> 200 easy warm-up, 8×50 moderate-hard with 20–30s rest, 200 easy. Build to 10–12×50 over the arc.</span></div>
-      <div class="info-row"><span class="num mono">SUN</span><span><b>Sunday: optional.</b> Easy 20 min or take it fully off. Skipping it costs you nothing.</span></div>
+      <div class="info-row"><span class="num mono">WED</span><span><b>Wednesday: the real swim.</b> 200 easy warm-up, 8×50 moderate-hard with 20–30s rest, 200 easy. Build to 10–12×50 over the arc.</span></div>
+      <div class="info-row"><span class="num mono">SUN</span><span><b>Sunday: optional.</b> Easy 20 min or take it fully off. Saturday is a lifting day now, so don't swim hard Friday night.</span></div>
     </div>
   </div>
 
@@ -216,6 +216,8 @@
       <div class="rule"><span class="num">04</span><span><b>One missed day changes nothing.</b> The plan just picks up where it left off — no makeup sessions, no guilt tax.</span></div>
       <div class="rule"><span class="num">05</span><span><b>Every session has a 10-minute floor.</b> Busy day? Do the compressed version. Keeping the pattern alive matters more than the full volume.</span></div>
       <div class="rule"><span class="num">06</span><span><b>Swim as often as you want, but keep lift-day swims easy</b> and do them after lifting, never before an upper day. Swimming is shoulder-heavy, so if your delts feel fried, the swim gets shorter, not the lift.</span></div>
+      <div class="rule"><span class="num">07</span><span><b>Push isolation lifts close to failure.</b> Lateral raises, curls, pushdowns, pec deck: 0 to 1 reps left on the last set. Big machine presses and pulldowns: 1 to 2 left. Growth tracks how close sets get to failure.</span></div>
+      <div class="rule"><span class="num">08</span><span><b>Own the stretch.</b> Control the bottom of every rep where the muscle is longest (arms overhead on pulldowns, arms low on lateral raises). On the last set of lateral raises, when full reps die, keep going with half reps in the bottom half.</span></div>
     </div>
   </div>
 
@@ -337,8 +339,9 @@ function daysBetween(a,b){ return Math.round((b-a)/86400000); }
 /* ============ PROGRAM DATA ============ */
 // Upper/lower, 4 lifting days, pinned to the calendar week (Mon = upper A).
 // Upper days carry extra lat and side-delt volume since those build the V taper.
-// Wed/Sat are dedicated swim days, Sunday is full rest (optional easy swim).
-const WEEKDAY_PLAN = {1:'upperA', 2:'lowerA', 3:'swim', 4:'upperB', 5:'lowerB', 6:'swim', 0:'rest'};
+// Wed is the swim day, Sat is a third upper day for lats, side delts and arms,
+// Sunday is full rest (optional easy swim).
+const WEEKDAY_PLAN = {1:'upperA', 2:'lowerA', 3:'swim', 4:'upperB', 5:'lowerB', 6:'upperC', 0:'rest'};
 
 const DAYS = {
   upperA: {
@@ -346,10 +349,10 @@ const DAYS = {
     warmup: ['Band pull-aparts, 2×15','Scap pulls on the bar, 2×8','One light set on the lateral raise machine'],
     main: [
       {id:'ua-1', name:'Pull-up negatives', sets:'3', reps:'3', rest:'90s', note:'Jump to the top, lower over a full 5 seconds. First, while fresh. Kept as the one bodyweight move because it\'s the fastest route to a real pull-up.'},
-      {id:'ua-2', name:'Lat pulldown', sets:'3', reps:'8–12', rest:'90s', note:'Pull elbows down to your back pockets. Lats, not a shrug.'},
+      {id:'ua-2', name:'Lat pulldown', sets:'3', reps:'8–12', rest:'90s', note:'Let the weight pull your arms fully overhead at the top for a real lat stretch, then drive elbows to your back pockets.'},
       {id:'ua-3', name:'Incline machine chest press', sets:'3', reps:'8–12', rest:'90s', note:'Seat set so the handles line up with mid-chest.'},
       {id:'ua-4', name:'Chest-supported row machine', sets:'3', reps:'10–12', rest:'75s', note:'Chest stays on the pad, squeeze the shoulder blades together.'},
-      {id:'ua-5', name:'Lateral raise machine', sets:'4', reps:'12–20', rest:'60s', note:'The main shoulder width driver. Use a cable lateral raise if there\'s no machine.'},
+      {id:'ua-5', name:'Lateral raise machine', sets:'4', reps:'12–20', rest:'60s', note:'The main shoulder width driver. Go to near failure, then finish the last set with half reps in the bottom half. Use a cable lateral raise if there\'s no machine.'},
       {id:'ua-6', name:'Face pulls (cable)', sets:'3', reps:'15', rest:'60s', note:'Still non-negotiable for posture.'}
     ],
     skill: {name:'Pull-up test (every 2 weeks only)', detail:'One max set of strict pull-ups, no more than once every 2 weeks. Log it so you can see it climb.'},
@@ -401,6 +404,21 @@ const DAYS = {
     posture: 'Hip flexor stretch, 2×30s/side. Wall angels, 2×10.',
     mvp: '3×12 ab crunch machine, 2×12/side torso rotation machine, 2×30s hollow hold. ~10 min total.'
   },
+  upperC: {
+    title: 'Upper C · V Taper', focusTag:'Gym · Lats, side delts, arms',
+    warmup: ['Band pull-aparts, 2×15','Arm circles, 15 each direction','One light set of lateral raises'],
+    main: [
+      {id:'uc-1', name:'Neutral-grip or single-arm lat pulldown', sets:'3', reps:'10–12', rest:'90s', note:'Different grip than Monday. Full stretch at the top every rep.'},
+      {id:'uc-2', name:'Cable lateral raise (cable behind you)', sets:'4', reps:'12–20', rest:'60s', note:'Cable runs behind your body so the side delt is loaded even at the bottom. Last set: half reps in the bottom half once full reps die.'},
+      {id:'uc-3', name:'Machine pullover or straight-arm cable pulldown', sets:'3', reps:'12–15', rest:'60s', note:'Lats with almost no biceps. Arms nearly straight, sweep down to your hips.'},
+      {id:'uc-4', name:'Pec deck', sets:'2', reps:'12–15', rest:'60s', note:'Keeps chest volume up without beating up the shoulders.'},
+      {id:'uc-5', name:'Cable curl (or preacher curl machine)', sets:'3', reps:'10–15', rest:'60s', note:'Control the bottom, don\'t swing.'},
+      {id:'uc-6', name:'Overhead cable triceps extension', sets:'3', reps:'10–15', rest:'60s', note:'Overhead position stretches the long head, the biggest part of the triceps.'}
+    ],
+    skill: null,
+    posture: 'Doorway chest stretch, 2×30s. Chin tucks, 2×10.',
+    mvp: '3×12 pulldown, 3×15 cable lateral raise, 2×12 curl. ~10 min total.'
+  },
   swim: {
     title: 'Swim Day', focusTag:'Pool · Conditioning',
     isSwim: true, isRest: true,
@@ -414,7 +432,7 @@ const DAYS = {
   }
 };
 
-const DAY_LABELS = {upperA:'Upper', lowerA:'Lower', upperB:'Upper', lowerB:'Lower', swim:'Swim', rest:'Rest'};
+const DAY_LABELS = {upperA:'Upper', lowerA:'Core', upperB:'Upper', lowerB:'Core', upperC:'V', swim:'Swim', rest:'Rest'};
 
 /* ============ STORAGE ============ */
 // Real browser localStorage — persists on any host, no external runtime required.
